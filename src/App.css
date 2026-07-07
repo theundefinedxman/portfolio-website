@@ -1,0 +1,52 @@
+/* App-specific local styles (if any) */
+.hero-content {
+  max-width: 800px;
+  margin-top: 15vh;
+  z-index: 10;
+}
+
+.glow-logo {
+  filter: drop-shadow(0 0 15px rgba(0, 242, 254, 0.4));
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.hobby-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(0, 242, 254, 0.05);
+  border: 1px solid rgba(0, 242, 254, 0.15);
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: var(--color-cyan);
+  transition: all 0.3s ease;
+}
+
+.hobby-tag:hover {
+  background: rgba(0, 242, 254, 0.15);
+  border-color: var(--color-cyan);
+  box-shadow: var(--shadow-cyan);
+}
+
+.skill-badge {
+  display: inline-block;
+  background: rgba(157, 78, 221, 0.05);
+  border: 1px solid rgba(157, 78, 221, 0.15);
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-family: var(--font-orbitron);
+  color: #c084fc;
+}
+
+.skill-badge:hover {
+  background: rgba(157, 78, 221, 0.15);
+  border-color: var(--color-purple);
+  box-shadow: var(--shadow-purple);
+}

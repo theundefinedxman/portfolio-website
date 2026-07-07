@@ -1,0 +1,264 @@
+import { useRef, useState } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { Html } from '@react-three/drei';
+import * as THREE from 'three';
+import { ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
+
+const Github = ({ size = 24, ...props }: React.SVGProps<SVGSVGElement> & { size?: number }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+    <path d="M9 18c-4.51 2-5-2-7-2" />
+  </svg>
+);
+
+
+interface Project {
+  title: string;
+  desc: string;
+  tech: string[];
+  link: string;
+  github: string;
+}
+
+const projects: Project[] = [
+  {
+    title: "OmniGraph DB",
+    desc: "A high-performance distributed graph database optimized for real-time paths, social connections, and cyclic relation metrics. Built from scratch with Rust.",
+    tech: ["Rust", "gRPC", "WebAssembly", "Docker"],
+    link: "#",
+    github: "#"
+  },
+  {
+    title: "Nebula Render",
+    desc: "A browser-based GPU pathtracer supporting photorealistic lighting, reflections, refraction, and mesh subdivisions in real time.",
+    tech: ["TypeScript", "WebGL 2", "GLSL", "Three.js"],
+    link: "#",
+    github: "#"
+  },
+  {
+    title: "PathFinder AI",
+    desc: "An elevation-aware routing model powered by reinforcement learning. Custom-tailored to map optimal routes for hiking trails and cycling tracks.",
+    tech: ["Python", "PyTorch", "FastAPI", "React", "Mapbox"],
+    link: "#",
+    github: "#"
+  }
+];
+
+interface CarouselRingProps {
+  activeIndex: number;
+}
+
+function CarouselRing({ activeIndex }: CarouselRingProps) {
+  const ringRef = useRef<THREE.Group>(null);
+  const count = projects.length;
+  const radius = 3.2; // Distance from the center
+
+  // Target angle rotation
+  const targetRotationY = -(activeIndex * (Math.PI * 2)) / count;
+
+  useFrame(() => {
+    if (!ringRef.current) return;
+    // Smoothly interpolate rotation toward target
+    ringRef.current.rotation.y = THREE.MathUtils.lerp(
+      ringRef.current.rotation.y,
+      targetRotationY,
+      0.08
+    );
+  });
+
+  return (
+    <group ref={ringRef}>
+      {projects.map((project, idx) => {
+        // Calculate radial coordinates
+        const angle = (idx * (Math.PI * 2)) / count;
+        const x = radius * Math.sin(angle);
+        const z = radius * Math.cos(angle);
+
+        return (
+          <group 
+            key={idx} 
+            position={[x, 0, z]} 
+            rotation={[0, angle, 0]}
+          >
+            {/* The 3D CSS Card */}
+            <Html 
+              transform 
+              occlude="blending"
+              distanceFactor={3}
+              style={{ pointerEvents: 'auto' }}
+            >
+              <div style={{
+                width: '320px',
+                padding: '20px',
+                background: 'rgba(13, 13, 22, 0.85)',
+                backdropFilter: 'blur(12px)',
+                WebkitBackdropFilter: 'blur(12px)',
+                border: idx === activeIndex ? '2px solid var(--color-cyan)' : '1px solid rgba(255,255,255,0.06)',
+                borderRadius: '12px',
+                color: '#fff',
+                fontFamily: 'var(--font-sans)',
+                boxShadow: idx === activeIndex ? 'var(--shadow-cyan)' : '0 8px 32px 0 rgba(0, 0, 0, 0.4)',
+                transform: idx === activeIndex ? 'scale(1.05)' : 'scale(0.92) opacity(0.5)',
+                transition: 'all 0.4s ease',
+                userSelect: 'none'
+              }}>
+                <h3 style={{
+                  fontFamily: 'var(--font-orbitron)',
+                  color: idx === activeIndex ? 'var(--color-cyan)' : '#fff',
+                  fontSize: '18px',
+                  marginBottom: '10px',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center'
+                }}>
+                  {project.title}
+                  {idx === activeIndex && (
+                    <span style={{ 
+                      fontSize: '9px', 
+                      background: 'rgba(0, 242, 254, 0.1)', 
+                      padding: '2px 6px', 
+                      borderRadius: '10px',
+                      color: 'var(--color-cyan)',
+                      border: '1px solid var(--color-cyan)'
+                    }}>ACTIVE</span>
+                  )}
+                </h3>
+                
+                <p style={{
+                  fontSize: '13px',
+                  color: 'var(--text-secondary)',
+                  marginBottom: '15px',
+                  lineHeight: '1.5'
+                }}>
+                  {project.desc}
+                </p>
+
+                {/* Tech Badges */}
+                <div style={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: '6px',
+                  marginBottom: '20px'
+                }}>
+                  {project.tech.map((t, i) => (
+                    <span key={i} style={{
+                      fontSize: '10px',
+                      background: 'rgba(157, 78, 221, 0.12)',
+                      border: '1px solid rgba(157, 78, 221, 0.3)',
+                      padding: '2px 6px',
+                      borderRadius: '4px',
+                      color: '#c084fc',
+                      fontFamily: 'var(--font-orbitron)'
+                    }}>
+                      {t}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Project Links */}
+                <div style={{
+                  display: 'flex',
+                  gap: '12px',
+                  borderTop: '1px solid rgba(255,255,255,0.06)',
+                  paddingTop: '12px'
+                }}>
+                  <a href={project.github} style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                    fontSize: '12px',
+                    color: 'var(--text-secondary)'
+                  }}>
+                    <Github size={14} /> Code
+                  </a>
+                  <a href={project.link} style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                    fontSize: '12px',
+                    color: 'var(--color-cyan)'
+                  }}>
+                    <ExternalLink size={14} /> Demo
+                  </a>
+                </div>
+              </div>
+            </Html>
+          </group>
+        );
+      })}
+    </group>
+  );
+}
+
+export default function Carousel3D() {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handlePrev = () => {
+    setActiveIndex((prev) => (prev - 1 + projects.length) % projects.length);
+  };
+
+  const handleNext = () => {
+    setActiveIndex((prev) => (prev + 1) % projects.length);
+  };
+
+  return (
+    <div style={{ position: 'relative', width: '100%', height: '500px' }}>
+      {/* 3D Canvas Area */}
+      <Canvas camera={{ position: [0, 0, 4.8], fov: 60 }} style={{ pointerEvents: 'auto' }}>
+        <ambientLight intensity={0.5} />
+        <directionalLight position={[5, 10, 5]} intensity={1.5} />
+        <CarouselRing activeIndex={activeIndex} />
+      </Canvas>
+
+      {/* Manual Navigation Controls */}
+      <div style={{
+        position: 'absolute',
+        bottom: '20px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '24px',
+        zIndex: 10
+      }}>
+        <button 
+          onClick={handlePrev}
+          className="cyber-button"
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '40px', height: '40px', padding: '0', borderRadius: '50%' }}
+          aria-label="Previous Project"
+        >
+          <ChevronLeft size={20} />
+        </button>
+        
+        <span style={{ 
+          fontFamily: 'var(--font-orbitron)', 
+          fontSize: '14px', 
+          color: 'var(--text-primary)',
+          letterSpacing: '2px'
+        }}>
+          0{activeIndex + 1} / 0{projects.length}
+        </span>
+
+        <button 
+          onClick={handleNext}
+          className="cyber-button"
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '40px', height: '40px', padding: '0', borderRadius: '50%' }}
+          aria-label="Next Project"
+        >
+          <ChevronRight size={20} />
+        </button>
+      </div>
+    </div>
+  );
+}
