@@ -152,12 +152,12 @@ function CarouselRing({ activeIndex }: CarouselRingProps) {
             key={idx} 
             position={[x, 0, z]} 
             rotation={[0, angle, 0]}
-            scale={1.8}
+            scale={0.9}
           >
             {/* The 3D CSS Card */}
             <Html 
               transform 
-              distanceFactor={5.5}
+              distanceFactor={4.5}
               style={{ pointerEvents: 'auto' }}
             >
               <div style={{
