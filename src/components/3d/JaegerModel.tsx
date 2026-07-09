@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { useGLTF, useAnimations, OrbitControls, Environment } from '@react-three/drei';
 import * as THREE from 'three';
@@ -110,7 +110,9 @@ export default function JaegerModel() {
         
         <Environment preset="city" />
         
-        <Soldier />
+        <Suspense fallback={null}>
+          <Soldier />
+        </Suspense>
         
         {/* Ground shadow receiver */}
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.3, 0]} receiveShadow>
