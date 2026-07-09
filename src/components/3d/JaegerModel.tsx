@@ -46,8 +46,8 @@ function Soldier() {
     <primitive 
       ref={groupRef}
       object={scene} 
-      scale={2.3} // Increased scale to fill vertical space
-      position={[0, -1.75, 0]} // Pushed down to align feet with card baselines
+      scale={2.0} // Tuned to 2.0 for optimal proportions within camera bounds
+      position={[0, -1.5, 0]} // Gounded feet relative to camera centering
     />
   );
 }
@@ -61,6 +61,7 @@ export default function JaegerModel() {
       width: '100%',
       height: '100%',
       minHeight: '440px',
+      maxHeight: '520px', // Failsafe cap to prevent infinite stretching on wide displays
       position: 'relative',
       overflow: 'hidden'
     }}>
@@ -85,7 +86,7 @@ export default function JaegerModel() {
       {/* Canvas background set to transparent to blend seamlessly with the main site background */}
       <Canvas 
         shadows
-        camera={{ position: [0, 0.3, 3.2], fov: 48 }} 
+        camera={{ position: [0, 0.05, 5.0], fov: 45 }} // Pulled back (Z=5.0) and centered on core (Y=0.05)
         style={{ background: 'transparent' }}
       >
         <ambientLight intensity={0.7} />
@@ -111,7 +112,7 @@ export default function JaegerModel() {
         </Suspense>
         
         {/* Ground shadow receiver aligned with scaled character feet */}
-        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.75, 0]} receiveShadow>
+        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.5, 0]} receiveShadow>
           <planeGeometry args={[10, 10]} />
           <shadowMaterial opacity={0.4} />
         </mesh>
