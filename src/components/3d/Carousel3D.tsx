@@ -152,7 +152,7 @@ function CarouselRing({ activeIndex, isMobile }: CarouselRingProps) {
         return (
           <group 
             key={idx} 
-            position={[x, isMobile ? -0.5 : -0.65, z]}
+            position={[x, isMobile ? 0.0 : 0.15, z]}
             rotation={[0, angle, 0]}
             scale={isMobile ? 0.72 : 1.0}
           >
