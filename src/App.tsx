@@ -5,6 +5,7 @@ import Carousel3D from './components/3d/Carousel3D';
 import ExperienceTimeline from './components/ui/ExperienceTimeline';
 import ContactForm from './components/ui/ContactForm';
 import LoadingScreen from './components/ui/LoadingScreen';
+import JaegerModel from './components/3d/JaegerModel';
 import { playSound } from './utils/sound';
 import { Mail, Cpu, Bike, Music, Trophy, GraduationCap, Terminal, Activity } from 'lucide-react';
 
@@ -398,6 +399,8 @@ function App() {
           <h2 className="section-title">// About Dev</h2>
           
           <div className="about-grid">
+            {/* 3D Pacific Rim Jaeger Robot */}
+            <JaegerModel />
             <div className="glass-panel" style={{ padding: '2.5rem' }}>
               <h3 style={{ fontFamily: 'var(--font-orbitron)', fontSize: '1.1rem', color: '#fff', marginBottom: '1.2rem', letterSpacing: '1px' }}>
                 Core Bio & Philosophy
