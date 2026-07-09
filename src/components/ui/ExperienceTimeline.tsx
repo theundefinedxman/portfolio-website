@@ -1,4 +1,4 @@
-import { Briefcase, GraduationCap, Bike, Compass, Terminal, Shield } from 'lucide-react';
+import { Briefcase, GraduationCap, Bike, Compass, Terminal, Shield, Music, Trophy } from 'lucide-react';
 
 interface TimelineEntry {
   type: 'work' | 'education' | 'hobby';
@@ -23,47 +23,60 @@ const timelineData: TimelineEntry[] = [
     date: 'WEEKENDS & HOLIDAYS',
     title: 'Peninsula Cycle Climber',
     subtitle: 'Cape Town Routes & Trails',
-    desc: 'Conquering the steep coastal climbs of Chapman\'s Peak and participating in regional cycling tours. Keeps my energy high and my discipline sharp.',
-    tags: ['Road Cycling', 'Endurance', 'Active Lifestyle', 'Cape Town Loops']
+    desc: 'Conquering the steep coastal climbs of Chapman\'s Peak and logging training miles. Keeps my energy high and my discipline sharp.',
+    tags: ['Cycling', 'Endurance', 'Active Lifestyle', 'Cape Town Loops']
   },
   {
     type: 'education',
-    date: '2021 - 2023',
-    title: 'BSc in Computer Science',
+    date: '2021 - PRESENT',
+    title: 'Computer Science & Computer Engineering',
     subtitle: 'University of Cape Town',
-    desc: 'Graduated with a core focus on algorithms, computer graphics, distributed systems, and computer network security.',
-    tags: ['Algorithms', 'C++', 'Python', 'Graphics', 'Networking']
+    desc: 'Studying algorithms, computer systems, computer networking, cloud computing, and hardware-software integration.',
+    tags: ['Algorithms', 'C++', 'Python', 'Networking', 'Systems']
   },
   {
     type: 'hobby',
-    date: 'SEASONAL',
-    title: 'Table Mountain & Western Cape Explorer',
-    subtitle: 'Hiking & Wilderness Adventurer',
-    desc: 'Regularly scaling Western Cape trail networks including Lion\'s Head, Platteklip Gorge, and remote wilderness trails. Nature is my primary source of creative inspiration.',
-    tags: ['Hiking', 'Trail Navigation', 'Mental Clarity', 'Outdoor Adventure']
+    date: 'LEISURE',
+    title: 'Afro Deep House Beats Producer',
+    subtitle: 'Electronic Music Composition',
+    desc: 'Producing deep rhythmic tracks in FL Studio. Merging technical software synthesis, sound engineering, and organic percussive textures.',
+    tags: ['Beats Production', 'Afro House', 'FL Studio', 'Sound Design']
+  },
+  {
+    type: 'hobby',
+    date: 'CONTINUOUS',
+    title: 'Tactical Chess Player',
+    subtitle: 'Board Strategies & Analysis',
+    desc: 'Analyzing board positions, pattern recognition, and tactical lines. Chess keeps my mind sharp for software debugging and complex system problem-solving.',
+    tags: ['Chess', 'Tactics', 'Pattern Recognition', 'Focus']
   },
   {
     type: 'work',
     date: '2023 (6 Months)',
     title: 'Junior Web Developer (Intern)',
     subtitle: 'ByteCraft Labs',
-    desc: 'Assisted in building responsive dashboards, writing automation integration tests, and writing documentation for internal developer portals.',
+    desc: 'Assisted in building responsive dashboards, writing automation integration tests, and documenting internal developer APIs.',
     tags: ['JavaScript', 'HTML/CSS', 'Git', 'Jest', 'API Integration']
   }
 ];
 
 export default function ExperienceTimeline() {
-  const getIcon = (type: string) => {
-    switch (type) {
-      case 'work':
-        return <Briefcase size={16} color="var(--color-cyan)" />;
-      case 'education':
-        return <GraduationCap size={16} color="var(--color-purple)" />;
-      case 'hobby':
-        return <Compass size={16} color="var(--color-green)" />;
-      default:
-        return <Terminal size={16} color="var(--text-primary)" />;
+  const getIcon = (item: TimelineEntry) => {
+    if (item.type === 'work') return <Briefcase size={16} color="var(--color-cyan)" />;
+    if (item.type === 'education') return <GraduationCap size={16} color="var(--color-purple)" />;
+    if (item.type === 'hobby') {
+      if (item.title.toLowerCase().includes('cycle') || item.title.toLowerCase().includes('cycling')) {
+        return <Bike size={16} color="var(--color-green)" />;
+      }
+      if (item.title.toLowerCase().includes('beats') || item.title.toLowerCase().includes('house')) {
+        return <Music size={16} color="var(--color-green)" />;
+      }
+      if (item.title.toLowerCase().includes('chess')) {
+        return <Trophy size={16} color="var(--color-green)" />;
+      }
+      return <Compass size={16} color="var(--color-green)" />;
     }
+    return <Terminal size={16} color="var(--text-primary)" />;
   };
 
   const getBorderColor = (type: string) => {
@@ -115,7 +128,7 @@ export default function ExperienceTimeline() {
                 background: 'var(--bg-primary)',
                 borderRadius: '50%'
               }}>
-                {getIcon(item.type)}
+                {getIcon(item)}
               </div>
             </div>
 
@@ -165,8 +178,9 @@ export default function ExperienceTimeline() {
                     className={item.type === 'hobby' ? 'hobby-tag' : 'skill-badge'}
                     style={item.type === 'hobby' ? { fontSize: '0.75rem', padding: '0.2rem 0.6rem' } : undefined}
                   >
-                    {item.type === 'hobby' && item.title.includes('Cycle') && <Bike size={12} style={{ marginRight: '3px' }} />}
-                    {item.type === 'hobby' && item.title.includes('Mountain') && <Compass size={12} style={{ marginRight: '3px' }} />}
+                    {item.type === 'hobby' && (item.title.toLowerCase().includes('cycle') || item.title.toLowerCase().includes('cycling')) && <Bike size={12} style={{ marginRight: '3px' }} />}
+                    {item.type === 'hobby' && (item.title.toLowerCase().includes('beats') || item.title.toLowerCase().includes('house')) && <Music size={12} style={{ marginRight: '3px' }} />}
+                    {item.type === 'hobby' && item.title.toLowerCase().includes('chess') && <Trophy size={12} style={{ marginRight: '3px' }} />}
                     {t}
                   </span>
                 ))}

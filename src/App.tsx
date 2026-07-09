@@ -3,7 +3,7 @@ import InteractiveCanvas from './components/3d/InteractiveCanvas';
 import Carousel3D from './components/3d/Carousel3D';
 import ExperienceTimeline from './components/ui/ExperienceTimeline';
 import ContactForm from './components/ui/ContactForm';
-import { Mail, Cpu, Bike, Compass } from 'lucide-react';
+import { Mail, Cpu, Bike, Music, Trophy } from 'lucide-react';
 
 const Github = ({ size = 24, ...props }: React.SVGProps<SVGSVGElement> & { size?: number }) => (
   <svg
@@ -151,39 +151,58 @@ function App() {
               <h1 style={{
                 fontSize: '3.6rem',
                 lineHeight: '1.1',
-                marginBottom: '1.5rem',
+                marginBottom: '1.2rem',
                 color: '#fff',
                 fontWeight: 800
               }}>
-                Xolisile <br />
+                Hi there, I'm <br />
                 <span style={{ 
                   background: 'linear-gradient(90deg, var(--color-cyan), var(--color-purple))',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   fontWeight: 900
-                }}>Buqwana</span>
+                }}>Sxova 👋</span>
               </h1>
-              
-              <h2 style={{
-                fontSize: '1.3rem',
-                color: 'var(--text-secondary)',
-                marginBottom: '1.5rem',
-                fontFamily: 'var(--font-orbitron)',
-                textTransform: 'none',
-                fontWeight: 500
-              }}>
-                Software Engineer // BSc Computer Science (UCT)
-              </h2>
 
-              <p style={{
-                fontSize: '1rem',
-                color: 'var(--text-secondary)',
-                marginBottom: '2.5rem',
-                maxWidth: '580px',
-                lineHeight: '1.6'
+              {/* Glowing Console Message */}
+              <div style={{
+                background: 'rgba(5, 5, 8, 0.75)',
+                border: '1px solid rgba(0, 242, 254, 0.25)',
+                padding: '10px 16px',
+                borderRadius: '6px',
+                fontFamily: 'var(--font-orbitron)',
+                fontSize: '0.85rem',
+                color: '#00f2fe',
+                display: 'inline-block',
+                marginBottom: '1.8rem',
+                letterSpacing: '1px',
+                boxShadow: 'inset 0 0 10px rgba(0, 242, 254, 0.05), 0 0 15px rgba(0, 242, 254, 0.05)'
               }}>
-                I specialize in engineering scalable software, designing real-time 3D modules, and crafting high-performance, responsive web architectures.
-              </p>
+                <span style={{ color: '#f72585' }}>System</span>.<span style={{ color: '#9d4edd' }}>out</span>.println(<span style={{ color: '#00f5d4' }}>"Welcome to my world!"</span>);
+              </div>
+              
+              <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '12px',
+                marginBottom: '2.5rem',
+                color: 'var(--text-secondary)',
+                fontSize: '0.96rem',
+                lineHeight: '1.5'
+              }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+                  <span style={{ fontSize: '1.1rem', lineHeight: '1' }}>🎓</span>
+                  <span>Computer Science & Computer Engineering Student @ University of Cape Town</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+                  <span style={{ fontSize: '1.1rem', lineHeight: '1' }}>👨‍💻</span>
+                  <span>Aspiring Software Engineer | Network & Cloud Enthusiast</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+                  <span style={{ fontSize: '1.1rem', lineHeight: '1' }}>🚀</span>
+                  <span>Passionate about building technology that solves real-world problems</span>
+                </div>
+              </div>
 
               <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
                 <button onClick={() => scrollToSection('projects')} className="cyber-button">
@@ -238,19 +257,22 @@ function App() {
               <h3 style={{ fontFamily: 'var(--font-orbitron)', fontSize: '1.1rem', color: '#fff', marginBottom: '1.2rem', letterSpacing: '1px' }}>
                 Core Bio & Philosophy
               </h3>
-              <p style={{ fontSize: '0.95rem', marginBottom: '1.5rem', lineHeight: '1.7', color: 'var(--text-secondary)' }}>
-                I am a Software Engineer with a computer science background from the <strong>University of Cape Town (UCT)</strong>. I aim to create code structures that are not only robust and highly-performant but also visually captivating.
+              <p style={{ fontSize: '0.95rem', marginBottom: '1.2rem', lineHeight: '1.7', color: 'var(--text-secondary)' }}>
+                I enjoy turning ideas into practical software solutions, whether it's developing desktop applications, building web platforms, or exploring network infrastructure. I'm particularly interested in backend development, networking, cloud computing, and open-source software.
               </p>
               <p style={{ fontSize: '0.95rem', lineHeight: '1.7', marginBottom: '1.5rem', color: 'var(--text-secondary)' }}>
-                When offline, I’m usually active outdoors. You can find me riding Chapman's Peak on my road bicycle or hiking up the trails around Table Mountain to gain fresh focus and energy.
+                For a bit of context, I like problems that sit between people and systems, where the technical constraints (compliance, settlement rails, legacy infrastructure) meet real human friction (cost, trust, access).
               </p>
               
               <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
                 <span className="hobby-tag">
-                  <Compass size={13} /> Hiking Trails
+                  <Trophy size={13} /> Chess
                 </span>
                 <span className="hobby-tag">
-                  <Bike size={13} /> Road Cycling
+                  <Bike size={13} /> Cycling
+                </span>
+                <span className="hobby-tag">
+                  <Music size={13} /> Afro Deep House beats
                 </span>
               </div>
             </div>
@@ -295,7 +317,82 @@ function App() {
             </div>
           </div>
 
+          {/* CURRENT ACTIVE RESEARCH PANEL */}
+          <div className="glass-panel" style={{
+            padding: '2.5rem',
+            margin: '2.5rem 0',
+            border: '1px solid rgba(157, 78, 221, 0.25)',
+            position: 'relative'
+          }}>
+            <div style={{
+              position: 'absolute',
+              top: '12px',
+              right: '16px',
+              fontFamily: 'var(--font-orbitron)',
+              fontSize: '8px',
+              color: 'var(--color-purple)',
+              letterSpacing: '2px',
+              border: '1px solid rgba(157, 78, 221, 0.4)',
+              padding: '3px 8px',
+              borderRadius: '10px'
+            }}>
+              [ ACTIVE LOG ]
+            </div>
+            
+            <h3 style={{
+              fontFamily: 'var(--font-orbitron)',
+              fontSize: '1.1rem',
+              color: '#fff',
+              marginBottom: '1.2rem',
+              letterSpacing: '1px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px'
+            }}>
+              🔭 Currently Working On
+            </h3>
+            
+            <h4 style={{
+              fontFamily: 'var(--font-orbitron)',
+              fontSize: '0.95rem',
+              color: 'var(--color-cyan)',
+              marginBottom: '0.8rem',
+              letterSpacing: '0.5px'
+            }}>
+              🌍 Cross-Border Payments Remittance (SADC Region)
+            </h4>
+            
+            <p style={{
+              fontSize: '0.94rem',
+              lineHeight: '1.7',
+              color: 'var(--text-secondary)',
+              marginBottom: '1rem'
+            }}>
+              I\'ve been digging into the software mechanics of P2P remittance systems for the SADC region: MTOs, KYC/AML compliance, ISO 20022 messaging, PAPSS, SADC RTGS, and mobile money rails. 
+            </p>
+            
+            <p style={{
+              fontSize: '0.94rem',
+              lineHeight: '1.7',
+              color: 'var(--text-secondary)',
+              fontWeight: 500
+            }}>
+              The goal is understanding where cost, speed, access, and transparency break down for the people who need these systems most.
+            </p>
+          </div>
+
           <ExperienceTimeline />
+
+          <div style={{
+            textAlign: 'center',
+            marginTop: '2.5rem',
+            fontFamily: 'var(--font-orbitron)',
+            color: 'var(--text-muted)',
+            fontSize: '11px',
+            letterSpacing: '1.5px'
+          }}>
+            // Currently learning, expect this profile to evolve as code does.
+          </div>
         </section>
 
         {/* PROJECTS SECTION */}
