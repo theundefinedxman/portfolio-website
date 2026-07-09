@@ -152,11 +152,12 @@ function CarouselRing({ activeIndex }: CarouselRingProps) {
             key={idx} 
             position={[x, 0, z]} 
             rotation={[0, angle, 0]}
+            scale={1.8}
           >
             {/* The 3D CSS Card */}
             <Html 
               transform 
-              distanceFactor={3}
+              distanceFactor={5.5}
               style={{ pointerEvents: 'auto' }}
             >
               <div style={{
@@ -275,9 +276,9 @@ export default function Carousel3D() {
   };
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '500px' }}>
+    <div style={{ position: 'relative', width: '100%', height: '580px' }}>
       {/* 3D Canvas Area (adjusted camera to 6.4 to maintain proportion with radius 4.8) */}
-      <Canvas camera={{ position: [0, 0, 6.4], fov: 60 }} style={{ pointerEvents: 'auto' }}>
+      <Canvas camera={{ position: [0, 0, 6.4], fov: 60 }} style={{ pointerEvents: 'auto', height: '100%', width: '100%' }}>
         <ambientLight intensity={0.5} />
         <directionalLight position={[5, 10, 5]} intensity={1.5} />
         <CarouselRing activeIndex={activeIndex} />
