@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import ParticleBackground from './components/3d/ParticleBackground';
 import InteractiveCanvas from './components/3d/InteractiveCanvas';
 import Carousel3D from './components/3d/Carousel3D';
 import ExperienceTimeline from './components/ui/ExperienceTimeline';
 import ContactForm from './components/ui/ContactForm';
+import LoadingScreen from './components/ui/LoadingScreen';
 import { Mail, Cpu, Bike, Music, Trophy, GraduationCap, Terminal, Activity } from 'lucide-react';
 
 const Github = ({ size = 24, ...props }: React.SVGProps<SVGSVGElement> & { size?: number }) => (
@@ -44,12 +46,18 @@ const Linkedin = ({ size = 24, ...props }: React.SVGProps<SVGSVGElement> & { siz
 import './App.css';
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  if (isLoading) {
+    return <LoadingScreen onComplete={() => setIsLoading(false)} />;
+  }
 
   return (
     <>
