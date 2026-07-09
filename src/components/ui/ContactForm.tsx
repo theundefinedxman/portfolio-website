@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { playSound } from '../../utils/sound';
 import confetti from 'canvas-confetti';
 import { Send, Terminal, TriangleAlert, CircleCheck } from 'lucide-react';
 
@@ -22,6 +23,7 @@ export default function ContactForm() {
     // Simulate high-tech secure transmission
     setTimeout(() => {
       setStatus('success');
+      playSound.success(); // Play digital success chime
       
       // Trigger canvas confetti explosion
       confetti({
@@ -227,6 +229,8 @@ export default function ContactForm() {
           type="submit"
           className={`cyber-button ${status === 'sending' ? 'active' : ''}`}
           disabled={status === 'sending'}
+          onClick={() => playSound.click()}
+          onMouseOver={() => playSound.hover()}
           style={{
             width: '100%',
             padding: '1rem',

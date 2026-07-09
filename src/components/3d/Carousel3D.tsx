@@ -3,6 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Html } from '@react-three/drei';
 import * as THREE from 'three';
 import { ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
+import { playSound } from '../../utils/sound';
 
 const Github = ({ size = 24, ...props }: React.SVGProps<SVGSVGElement> & { size?: number }) => (
   <svg
@@ -237,22 +238,36 @@ function CarouselRing({ activeIndex }: CarouselRingProps) {
                   borderTop: '1px solid rgba(255,255,255,0.06)',
                   paddingTop: '12px'
                 }}>
-                  <a href={project.github} target="_blank" rel="noopener noreferrer" style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '4px',
-                    fontSize: '12px',
-                    color: 'var(--text-secondary)'
-                  }}>
+                  <a 
+                    href={project.github} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    onClick={() => playSound.click()}
+                    onMouseOver={() => playSound.hover()}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                      fontSize: '12px',
+                      color: 'var(--text-secondary)'
+                    }}
+                  >
                     <Github size={14} /> Code
                   </a>
-                  <a href={project.link} target="_blank" rel="noopener noreferrer" style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '4px',
-                    fontSize: '12px',
-                    color: 'var(--color-cyan)'
-                  }}>
+                  <a 
+                    href={project.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    onClick={() => playSound.click()}
+                    onMouseOver={() => playSound.hover()}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                      fontSize: '12px',
+                      color: 'var(--color-cyan)'
+                    }}
+                  >
                     <ExternalLink size={14} /> Demo
                   </a>
                 </div>
@@ -297,7 +312,11 @@ export default function Carousel3D() {
         zIndex: 10
       }}>
         <button 
-          onClick={handlePrev}
+          onClick={() => {
+            playSound.click();
+            handlePrev();
+          }}
+          onMouseOver={() => playSound.hover()}
           className="cyber-button"
           style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '40px', height: '40px', padding: '0', borderRadius: '50%' }}
           aria-label="Previous Project"
@@ -315,7 +334,11 @@ export default function Carousel3D() {
         </span>
 
         <button 
-          onClick={handleNext}
+          onClick={() => {
+            playSound.click();
+            handleNext();
+          }}
+          onMouseOver={() => playSound.hover()}
           className="cyber-button"
           style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '40px', height: '40px', padding: '0', borderRadius: '50%' }}
           aria-label="Next Project"

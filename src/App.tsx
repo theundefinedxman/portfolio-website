@@ -5,6 +5,7 @@ import Carousel3D from './components/3d/Carousel3D';
 import ExperienceTimeline from './components/ui/ExperienceTimeline';
 import ContactForm from './components/ui/ContactForm';
 import LoadingScreen from './components/ui/LoadingScreen';
+import { playSound } from './utils/sound';
 import { Mail, Cpu, Bike, Music, Trophy, GraduationCap, Terminal, Activity } from 'lucide-react';
 
 const Github = ({ size = 24, ...props }: React.SVGProps<SVGSVGElement> & { size?: number }) => (
@@ -56,7 +57,10 @@ function App() {
   };
 
   if (isLoading) {
-    return <LoadingScreen onComplete={() => setIsLoading(false)} />;
+    return <LoadingScreen onComplete={() => {
+      setIsLoading(false);
+      playSound.boot();
+    }} />;
   }
 
   return (
@@ -84,7 +88,10 @@ function App() {
           padding: 0
         }}>
           <div 
-            onClick={() => scrollToSection('hero')}
+            onClick={() => {
+              playSound.click();
+              scrollToSection('hero');
+            }}
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -99,7 +106,10 @@ function App() {
               userSelect: 'none',
               transition: 'opacity 0.2s ease'
             }}
-            onMouseOver={(e) => { (e.currentTarget as HTMLDivElement).style.opacity = '0.8'; }}
+            onMouseOver={(e) => {
+              playSound.hover();
+              (e.currentTarget as HTMLDivElement).style.opacity = '0.8';
+            }}
             onMouseOut={(e) => { (e.currentTarget as HTMLDivElement).style.opacity = '1.0'; }}
           >
             <Cpu size={18} /> XB_CORE.SYS
@@ -112,7 +122,10 @@ function App() {
             {['hero', 'about', 'projects', 'contact'].map((sec) => (
               <button
                 key={sec}
-                onClick={() => scrollToSection(sec)}
+                onClick={() => {
+                  playSound.click();
+                  scrollToSection(sec);
+                }}
                 style={{
                   background: 'none',
                   border: 'none',
@@ -125,6 +138,7 @@ function App() {
                   textTransform: 'uppercase'
                 }}
                 onMouseOver={(e) => {
+                  playSound.hover();
                   (e.target as HTMLButtonElement).style.color = 'var(--color-cyan)';
                   (e.target as HTMLButtonElement).style.textShadow = 'var(--shadow-cyan)';
                 }}
@@ -308,11 +322,26 @@ function App() {
                 </div>
               </div>
 
-              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                <button onClick={() => scrollToSection('projects')} className="cyber-button">
+               <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                <button 
+                  onClick={() => {
+                    playSound.click();
+                    scrollToSection('projects');
+                  }}
+                  onMouseOver={() => playSound.hover()}
+                  className="cyber-button"
+                >
                   VIEW PROJECTS
                 </button>
-                <button onClick={() => scrollToSection('contact')} className="cyber-button" style={{ borderColor: 'var(--color-purple)', color: '#c084fc' }}>
+                <button 
+                  onClick={() => {
+                    playSound.click();
+                    scrollToSection('contact');
+                  }}
+                  onMouseOver={() => playSound.hover()}
+                  className="cyber-button" 
+                  style={{ borderColor: 'var(--color-purple)', color: '#c084fc' }}
+                >
                   GET IN TOUCH
                 </button>
               </div>
@@ -323,13 +352,35 @@ function App() {
                 gap: '1.8rem',
                 marginTop: '3.5rem'
               }}>
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub" style={{ color: 'var(--text-secondary)' }}>
+                <a 
+                  href="https://github.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  aria-label="GitHub" 
+                  onClick={() => playSound.click()}
+                  onMouseOver={() => playSound.hover()}
+                  style={{ color: 'var(--text-secondary)' }}
+                >
                   <Github size={20} />
                 </a>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" style={{ color: 'var(--text-secondary)' }}>
+                <a 
+                  href="https://linkedin.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  aria-label="LinkedIn" 
+                  onClick={() => playSound.click()}
+                  onMouseOver={() => playSound.hover()}
+                  style={{ color: 'var(--text-secondary)' }}
+                >
                   <Linkedin size={20} />
                 </a>
-                <a href="mailto:xolisilebuqwana@gmail.com" aria-label="Email" style={{ color: 'var(--text-secondary)' }}>
+                <a 
+                  href="mailto:xolisilebuqwana@gmail.com" 
+                  aria-label="Email" 
+                  onClick={() => playSound.click()}
+                  onMouseOver={() => playSound.hover()}
+                  style={{ color: 'var(--text-secondary)' }}
+                >
                   <Mail size={20} />
                 </a>
               </div>
