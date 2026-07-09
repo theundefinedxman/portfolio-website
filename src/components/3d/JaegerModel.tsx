@@ -46,8 +46,8 @@ function Soldier() {
     <primitive 
       ref={groupRef}
       object={scene} 
-      scale={1.75} 
-      position={[0, -1.3, 0]} 
+      scale={2.3} // Increased scale to fill vertical space
+      position={[0, -1.75, 0]} // Pushed down to align feet with card baselines
     />
   );
 }
@@ -57,19 +57,14 @@ useGLTF.preload(`${import.meta.env.BASE_URL || '/'}models/Soldier.glb`);
 
 export default function JaegerModel() {
   return (
-    <div className="glass-panel animate-glow" style={{
+    <div style={{
       width: '100%',
-      height: '420px',
+      height: '100%',
+      minHeight: '440px',
       position: 'relative',
-      overflow: 'hidden',
-      border: '1px solid rgba(0, 242, 254, 0.15)',
-      boxShadow: '0 8px 32px 0 rgba(0, 242, 254, 0.02)'
+      overflow: 'hidden'
     }}>
-      {/* Corner Bracket decorations */}
-      <div style={{ position: 'absolute', top: '-1px', left: '-1px', width: '8px', height: '8px', borderTop: '2px solid var(--color-cyan)', borderLeft: '2px solid var(--color-cyan)' }} />
-      <div style={{ position: 'absolute', bottom: '-1px', right: '-1px', width: '8px', height: '8px', borderBottom: '2px solid var(--color-cyan)', borderRight: '2px solid var(--color-cyan)' }} />
-
-      {/* Cyber Grid Sub-Header */}
+      {/* HUD floating info tag (no borders) */}
       <div style={{
         position: 'absolute',
         top: '12px',
@@ -84,13 +79,14 @@ export default function JaegerModel() {
         gap: '6px'
       }}>
         <span style={{ display: 'inline-block', width: '6px', height: '6px', backgroundColor: 'var(--color-cyan)', borderRadius: '50%', boxShadow: '0 0 8px var(--color-cyan)' }} />
-        JAEGER_UNIT // HUMANOID_STANDBY.EXE
+        JAEGER_UNIT // HUMANOID_ACTIVE.EXE
       </div>
 
+      {/* Canvas background set to transparent to blend seamlessly with the main site background */}
       <Canvas 
         shadows
-        camera={{ position: [0, 0.4, 3.0], fov: 48 }} 
-        style={{ background: 'rgba(5, 5, 8, 0.4)' }}
+        camera={{ position: [0, 0.3, 3.2], fov: 48 }} 
+        style={{ background: 'transparent' }}
       >
         <ambientLight intensity={0.7} />
         
@@ -114,8 +110,8 @@ export default function JaegerModel() {
           <Soldier />
         </Suspense>
         
-        {/* Ground shadow receiver */}
-        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.3, 0]} receiveShadow>
+        {/* Ground shadow receiver aligned with scaled character feet */}
+        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.75, 0]} receiveShadow>
           <planeGeometry args={[10, 10]} />
           <shadowMaterial opacity={0.4} />
         </mesh>
