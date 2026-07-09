@@ -46,8 +46,8 @@ function Soldier() {
     <primitive 
       ref={groupRef}
       object={scene} 
-      scale={2.0} // Tuned to 2.0 for optimal proportions within camera bounds
-      position={[0, -1.5, 0]} // Gounded feet relative to camera centering
+      scale={2.0} 
+      position={[0, -1.85, 0]} // Lowered model from -1.5 to -1.85
     />
   );
 }
@@ -86,7 +86,7 @@ export default function JaegerModel() {
       {/* Canvas background set to transparent to blend seamlessly with the main site background */}
       <Canvas 
         shadows
-        camera={{ position: [0, 0.05, 5.0], fov: 45 }} // Pulled back (Z=5.0) and centered on core (Y=0.05)
+        camera={{ position: [0, -0.15, 5.0], fov: 45 }} // Lowered camera target (Y=-0.15) to track lowered model
         style={{ background: 'transparent' }}
       >
         <ambientLight intensity={0.7} />
@@ -112,7 +112,7 @@ export default function JaegerModel() {
         </Suspense>
         
         {/* Ground shadow receiver aligned with scaled character feet */}
-        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.5, 0]} receiveShadow>
+        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.85, 0]} receiveShadow>
           <planeGeometry args={[10, 10]} />
           <shadowMaterial opacity={0.4} />
         </mesh>
