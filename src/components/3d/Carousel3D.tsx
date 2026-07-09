@@ -22,7 +22,6 @@ const Github = ({ size = 24, ...props }: React.SVGProps<SVGSVGElement> & { size?
   </svg>
 );
 
-
 interface Project {
   title: string;
   desc: string;
@@ -33,25 +32,88 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: "OmniGraph DB",
-    desc: "A high-performance distributed graph database optimized for real-time paths, social connections, and cyclic relation metrics. Built from scratch with Rust.",
-    tech: ["Rust", "gRPC", "WebAssembly", "Docker"],
-    link: "#",
-    github: "#"
+    title: "Interledger Payments Hub",
+    desc: "Open payments solution developed during the UCT Financial Innovation Hub hackathon, designing secure P2P ledger systems.",
+    tech: ["Python", "Interledger API", "Fintech"],
+    link: "https://github.com/theundefinedxman/UCT-Financial-innovation-Hub-x-Interledger-hackathon",
+    github: "https://github.com/theundefinedxman/UCT-Financial-innovation-Hub-x-Interledger-hackathon"
   },
   {
-    title: "Nebula Render",
-    desc: "A browser-based GPU pathtracer supporting photorealistic lighting, reflections, refraction, and mesh subdivisions in real time.",
-    tech: ["TypeScript", "WebGL 2", "GLSL", "Three.js"],
-    link: "#",
-    github: "#"
+    title: "Neural Network Optimizer",
+    desc: "Constructing and optimizing artificial neural networks from scratch. Focuses on feedforward propagation, backpropagation, and training speed.",
+    tech: ["Python", "NumPy", "Deep Learning", "Math"],
+    link: "https://github.com/theundefinedxman/Neural-Network",
+    github: "https://github.com/theundefinedxman/Neural-Network"
   },
   {
-    title: "PathFinder AI",
-    desc: "An elevation-aware routing model powered by reinforcement learning. Custom-tailored to map optimal routes for hiking trails and cycling tracks.",
-    tech: ["Python", "PyTorch", "FastAPI", "React", "Mapbox"],
-    link: "#",
-    github: "#"
+    title: "Neural Nets Architecture",
+    desc: "Dedicated codebase for crafting complex network layouts, gradient descent tuning, and cost function minimization.",
+    tech: ["Python", "Machine Learning", "Optimization"],
+    link: "https://github.com/theundefinedxman/Neural-Networks-Project",
+    github: "https://github.com/theundefinedxman/Neural-Networks-Project"
+  },
+  {
+    title: "STM32F4 Audio Sampler",
+    desc: "Real-time audio signal acquisition and sampling system built on the STM32F4 processor, utilizing ADC/DAC modules.",
+    tech: ["C", "STM32F4", "DSP", "Embedded Systems"],
+    link: "https://github.com/theundefinedxman/EEE3096S-2025-Practical-4",
+    github: "https://github.com/theundefinedxman/EEE3096S-2025-Practical-4"
+  },
+  {
+    title: "Perceptron Applications",
+    desc: "Implementation of basic perceptron models, evaluating their boundaries, training weights, and applications in binary classification.",
+    tech: ["Python", "Scikit-Learn", "Machine Learning"],
+    link: "https://github.com/theundefinedxman/Perceptron-Implementation-and-Applications",
+    github: "https://github.com/theundefinedxman/Perceptron-Implementation-and-Applications"
+  },
+  {
+    title: "STM32 Profiler & Benchmark",
+    desc: "Performance analysis, profiling, and benchmarking comparing execution runtimes between STM32F0 and STM32F4 processors.",
+    tech: ["C", "STM32F4", "Benchmarking", "ARM Cortex"],
+    link: "https://github.com/theundefinedxman/EEE3096S-2025-Practical-3",
+    github: "https://github.com/theundefinedxman/EEE3096S-2025-Practical-3"
+  },
+  {
+    title: "WDI Machine Learning",
+    desc: "Supervised machine learning analysis of the World Development Index dataset to predict indicators and evaluate growth trends.",
+    tech: ["Python", "Pandas", "Scikit-Learn", "Regression"],
+    link: "https://github.com/theundefinedxman/World-Development-Index-Machine-Learning-Analysis",
+    github: "https://github.com/theundefinedxman/World-Development-Index-Machine-Learning-Analysis"
+  },
+  {
+    title: "STM32F0 Assembly GPIO",
+    desc: "Low-level firmware utilizing ARM Assembly code to directly configure and command the GPIO registers of the STM32F0 MCU.",
+    tech: ["ARM Assembly", "STM32F0", "GPIO", "Hardware Link"],
+    link: "https://github.com/theundefinedxman/EEE3096S-2025-Practical-2",
+    github: "https://github.com/theundefinedxman/EEE3096S-2025-Practical-2"
+  },
+  {
+    title: "Mandelbrot STM32 Benchmark",
+    desc: "Benchmarking the computing performance of the STM32F0 microcontroller using complex fractal Mandelbrot set rendering loops.",
+    tech: ["C", "STM32F0", "Mandelbrot", "Low-Level Math"],
+    link: "https://github.com/theundefinedxman/EEE3096-2025-Practical-1B--Public",
+    github: "https://github.com/theundefinedxman/EEE3096-2025-Practical-1B--Public"
+  },
+  {
+    title: "STM32 Interrupt Controller",
+    desc: "Firmware setup establishing precise hardware timer interrupts, input capture, LEDs, and interactive pushbuttons on the STM32.",
+    tech: ["C", "STM32", "Interrupts", "Timers"],
+    link: "https://github.com/theundefinedxman/EEE3096-2025-Practical-1A-",
+    github: "https://github.com/theundefinedxman/EEE3096-2025-Practical-1A-"
+  },
+  {
+    title: "Prodigy Unit Converter",
+    desc: "A desktop/web utility package converting between various metrics, weights, lengths, and temperature scales.",
+    tech: ["Python", "Tkinter", "GUI Tools"],
+    link: "https://github.com/theundefinedxman/Prodigy-Internship-Task-1-Unit-Converters",
+    github: "https://github.com/theundefinedxman/Prodigy-Internship-Task-1-Unit-Converters"
+  },
+  {
+    title: "Prodigy Guessing Game",
+    desc: "An interactive CLI-based numerical guessing game featuring customizable ranges, scoring systems, and feedback hints.",
+    tech: ["Python", "CLI", "Game Logic"],
+    link: "https://github.com/theundefinedxman/Prodigy-Internship-Task-2-Guessing-Game",
+    github: "https://github.com/theundefinedxman/Prodigy-Internship-Task-2-Guessing-Game"
   }
 ];
 
@@ -62,7 +124,7 @@ interface CarouselRingProps {
 function CarouselRing({ activeIndex }: CarouselRingProps) {
   const ringRef = useRef<THREE.Group>(null);
   const count = projects.length;
-  const radius = 3.2; // Distance from the center
+  const radius = 4.8; // Increased from 3.2 to accommodate 12 cards without overlap
 
   // Target angle rotation
   const targetRotationY = -(activeIndex * (Math.PI * 2)) / count;
@@ -173,7 +235,7 @@ function CarouselRing({ activeIndex }: CarouselRingProps) {
                   borderTop: '1px solid rgba(255,255,255,0.06)',
                   paddingTop: '12px'
                 }}>
-                  <a href={project.github} style={{
+                  <a href={project.github} target="_blank" rel="noopener noreferrer" style={{
                     display: 'flex',
                     alignItems: 'center',
                     gap: '4px',
@@ -182,7 +244,7 @@ function CarouselRing({ activeIndex }: CarouselRingProps) {
                   }}>
                     <Github size={14} /> Code
                   </a>
-                  <a href={project.link} style={{
+                  <a href={project.link} target="_blank" rel="noopener noreferrer" style={{
                     display: 'flex',
                     alignItems: 'center',
                     gap: '4px',
@@ -214,8 +276,8 @@ export default function Carousel3D() {
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '500px' }}>
-      {/* 3D Canvas Area */}
-      <Canvas camera={{ position: [0, 0, 4.8], fov: 60 }} style={{ pointerEvents: 'auto' }}>
+      {/* 3D Canvas Area (adjusted camera to 6.4 to maintain proportion with radius 4.8) */}
+      <Canvas camera={{ position: [0, 0, 6.4], fov: 60 }} style={{ pointerEvents: 'auto' }}>
         <ambientLight intensity={0.5} />
         <directionalLight position={[5, 10, 5]} intensity={1.5} />
         <CarouselRing activeIndex={activeIndex} />
@@ -247,7 +309,7 @@ export default function Carousel3D() {
           color: 'var(--text-primary)',
           letterSpacing: '2px'
         }}>
-          0{activeIndex + 1} / 0{projects.length}
+          {activeIndex + 1 < 10 ? `0${activeIndex + 1}` : activeIndex + 1} / {projects.length < 10 ? `0${projects.length}` : projects.length}
         </span>
 
         <button 
