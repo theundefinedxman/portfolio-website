@@ -317,7 +317,7 @@ export default function Carousel3D() {
         transform: 'translateX(-50%)',
         display: 'flex',
         alignItems: 'center',
-        gap: '24px',
+        gap: '40px', // Increased gap to prevent any overlap
         zIndex: 10
       }}>
         <button 
@@ -325,9 +325,31 @@ export default function Carousel3D() {
             playSound.click();
             handlePrev();
           }}
-          onMouseOver={() => playSound.hover()}
-          className="cyber-button"
-          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '40px', height: '40px', padding: '0', borderRadius: '50%' }}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '40px',
+            height: '40px',
+            padding: '0',
+            borderRadius: '50%',
+            background: 'rgba(5, 5, 8, 0.7)',
+            border: '1px solid var(--color-cyan)',
+            color: 'var(--color-cyan)',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease',
+            boxShadow: '0 0 10px rgba(0, 242, 254, 0.15)',
+            outline: 'none'
+          }}
+          onMouseEnter={(e) => {
+            playSound.hover();
+            e.currentTarget.style.background = 'rgba(0, 242, 254, 0.15)';
+            e.currentTarget.style.boxShadow = '0 0 15px rgba(0, 242, 254, 0.4)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = 'rgba(5, 5, 8, 0.7)';
+            e.currentTarget.style.boxShadow = '0 0 10px rgba(0, 242, 254, 0.15)';
+          }}
           aria-label="Previous Project"
         >
           <ChevronLeft size={20} />
@@ -337,7 +359,8 @@ export default function Carousel3D() {
           fontFamily: 'var(--font-orbitron)', 
           fontSize: '14px', 
           color: 'var(--text-primary)',
-          letterSpacing: '2px'
+          letterSpacing: '2px',
+          userSelect: 'none'
         }}>
           {activeIndex + 1 < 10 ? `0${activeIndex + 1}` : activeIndex + 1} / {projects.length < 10 ? `0${projects.length}` : projects.length}
         </span>
@@ -347,9 +370,31 @@ export default function Carousel3D() {
             playSound.click();
             handleNext();
           }}
-          onMouseOver={() => playSound.hover()}
-          className="cyber-button"
-          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '40px', height: '40px', padding: '0', borderRadius: '50%' }}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '40px',
+            height: '40px',
+            padding: '0',
+            borderRadius: '50%',
+            background: 'rgba(5, 5, 8, 0.7)',
+            border: '1px solid var(--color-cyan)',
+            color: 'var(--color-cyan)',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease',
+            boxShadow: '0 0 10px rgba(0, 242, 254, 0.15)',
+            outline: 'none'
+          }}
+          onMouseEnter={(e) => {
+            playSound.hover();
+            e.currentTarget.style.background = 'rgba(0, 242, 254, 0.15)';
+            e.currentTarget.style.boxShadow = '0 0 15px rgba(0, 242, 254, 0.4)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = 'rgba(5, 5, 8, 0.7)';
+            e.currentTarget.style.boxShadow = '0 0 10px rgba(0, 242, 254, 0.15)';
+          }}
           aria-label="Next Project"
         >
           <ChevronRight size={20} />
