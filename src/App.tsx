@@ -75,17 +75,25 @@ function App() {
           alignItems: 'center',
           padding: 0
         }}>
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            fontFamily: 'var(--font-orbitron)',
-            fontWeight: 800,
-            fontSize: '1.1rem',
-            letterSpacing: '2.5px',
-            color: 'var(--color-cyan)',
-            textShadow: 'var(--shadow-cyan)'
-          }}>
+          <div 
+            onClick={() => scrollToSection('hero')}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              fontFamily: 'var(--font-orbitron)',
+              fontWeight: 800,
+              fontSize: '1.1rem',
+              letterSpacing: '2.5px',
+              color: 'var(--color-cyan)',
+              textShadow: 'var(--shadow-cyan)',
+              cursor: 'pointer',
+              userSelect: 'none',
+              transition: 'opacity 0.2s ease'
+            }}
+            onMouseOver={(e) => { (e.currentTarget as HTMLDivElement).style.opacity = '0.8'; }}
+            onMouseOut={(e) => { (e.currentTarget as HTMLDivElement).style.opacity = '1.0'; }}
+          >
             <Cpu size={18} /> XB_CORE.SYS
           </div>
 
