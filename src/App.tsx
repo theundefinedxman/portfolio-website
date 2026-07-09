@@ -3,7 +3,7 @@ import InteractiveCanvas from './components/3d/InteractiveCanvas';
 import Carousel3D from './components/3d/Carousel3D';
 import ExperienceTimeline from './components/ui/ExperienceTimeline';
 import ContactForm from './components/ui/ContactForm';
-import { Mail, Cpu, Bike, Music, Trophy } from 'lucide-react';
+import { Mail, Cpu, Bike, Music, Trophy, GraduationCap, Terminal, Activity } from 'lucide-react';
 
 const Github = ({ size = 24, ...props }: React.SVGProps<SVGSVGElement> & { size?: number }) => (
   <svg
@@ -189,26 +189,114 @@ function App() {
                 <span style={{ color: '#f72585' }}>System</span>.<span style={{ color: '#9d4edd' }}>out</span>.println(<span style={{ color: '#00f5d4' }}>"Welcome to my world!"</span>);
               </div>
               
-              <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '12px',
+              {/* Developer Diagnostics Terminal */}
+              <div className="glass-panel" style={{
+                padding: '1.5rem',
+                border: '1px solid rgba(0, 242, 254, 0.15)',
+                borderRadius: '8px',
+                position: 'relative',
+                background: 'rgba(10, 10, 20, 0.6)',
+                backdropFilter: 'blur(10px)',
+                maxWidth: '540px',
                 marginBottom: '2.5rem',
-                color: 'var(--text-secondary)',
-                fontSize: '0.96rem',
-                lineHeight: '1.5'
+                boxShadow: '0 8px 32px 0 rgba(0, 242, 254, 0.02)',
               }}>
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-                  <span style={{ fontSize: '1.1rem', lineHeight: '1' }}>🎓</span>
-                  <span>Computer Science & Computer Engineering Student @ University of Cape Town</span>
+                {/* Corner high-tech brackets */}
+                <div style={{ position: 'absolute', top: '-1px', left: '-1px', width: '8px', height: '8px', borderTop: '2px solid var(--color-cyan)', borderLeft: '2px solid var(--color-cyan)', borderRadius: '2px 0 0 0' }} />
+                <div style={{ position: 'absolute', bottom: '-1px', right: '-1px', width: '8px', height: '8px', borderBottom: '2px solid var(--color-cyan)', borderRight: '2px solid var(--color-cyan)', borderRadius: '0 0 2px 0' }} />
+
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  fontFamily: 'var(--font-orbitron)',
+                  fontSize: '9px',
+                  letterSpacing: '1.5px',
+                  color: 'var(--text-muted)',
+                  marginBottom: '1rem',
+                  borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+                  paddingBottom: '8px'
+                }}>
+                  <span style={{ display: 'inline-block', width: '6px', height: '6px', backgroundColor: 'var(--color-green)', borderRadius: '50%', boxShadow: '0 0 8px var(--color-green)' }} />
+                  SYS.STATUS // PROFILE_LOGS.EXE
                 </div>
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-                  <span style={{ fontSize: '1.1rem', lineHeight: '1' }}>👨‍💻</span>
-                  <span>Aspiring Software Engineer | Network & Cloud Enthusiast</span>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-                  <span style={{ fontSize: '1.1rem', lineHeight: '1' }}>🚀</span>
-                  <span>Passionate about building technology that solves real-world problems</span>
+
+                <div style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '14px',
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: '0.92rem',
+                  color: 'var(--text-secondary)'
+                }}>
+                  {/* Item 1: Education */}
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      width: '28px',
+                      height: '28px',
+                      borderRadius: '6px',
+                      background: 'rgba(0, 242, 254, 0.1)',
+                      border: '1px solid rgba(0, 242, 254, 0.25)',
+                      color: 'var(--color-cyan)',
+                      flexShrink: 0,
+                      marginTop: '2px'
+                    }}>
+                      <GraduationCap size={15} />
+                    </div>
+                    <div>
+                      <div style={{ fontFamily: 'var(--font-orbitron)', fontSize: '10px', color: 'var(--color-cyan)', letterSpacing: '0.5px', marginBottom: '2px' }}>ACADEMICS</div>
+                      <span style={{ color: '#fff' }}>BSc Computer Science & Computer Engineering</span> at the <span style={{ color: 'var(--color-cyan)', fontWeight: 500 }}>University of Cape Town</span>
+                    </div>
+                  </div>
+
+                  {/* Item 2: Focus */}
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      width: '28px',
+                      height: '28px',
+                      borderRadius: '6px',
+                      background: 'rgba(157, 78, 221, 0.1)',
+                      border: '1px solid rgba(157, 78, 221, 0.25)',
+                      color: 'var(--color-purple)',
+                      flexShrink: 0,
+                      marginTop: '2px'
+                    }}>
+                      <Terminal size={15} />
+                    </div>
+                    <div>
+                      <div style={{ fontFamily: 'var(--font-orbitron)', fontSize: '10px', color: 'var(--color-purple)', letterSpacing: '0.5px', marginBottom: '2px' }}>SPECIALIZATION</div>
+                      Aspiring Software Engineer specialized in <span style={{ color: '#fff' }}>Network Protocols & Cloud Architectures</span>
+                    </div>
+                  </div>
+
+                  {/* Item 3: Mission */}
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      width: '28px',
+                      height: '28px',
+                      borderRadius: '6px',
+                      background: 'rgba(247, 37, 133, 0.1)',
+                      border: '1px solid rgba(247, 37, 133, 0.25)',
+                      color: 'var(--color-pink)',
+                      flexShrink: 0,
+                      marginTop: '2px'
+                    }}>
+                      <Activity size={15} />
+                    </div>
+                    <div>
+                      <div style={{ fontFamily: 'var(--font-orbitron)', fontSize: '10px', color: 'var(--color-pink)', letterSpacing: '0.5px', marginBottom: '2px' }}>CORE_MISSION</div>
+                      Designing <span style={{ color: '#fff' }}>resilient, real-world technologies</span> that bridge systems and human needs
+                    </div>
+                  </div>
                 </div>
               </div>
 
