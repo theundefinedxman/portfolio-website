@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
+import { OrbitControls, Environment, Outlines } from '@react-three/drei';
 import * as THREE from 'three';
 
 function JaegerRobot() {
@@ -22,8 +22,8 @@ function JaegerRobot() {
 
     // 2. Head scanning animation (looks left and right, tilts)
     if (headRef.current) {
-      headRef.current.rotation.y = Math.sin(t * 0.8) * 0.3;
-      headRef.current.rotation.x = (Math.cos(t * 1.2) * 0.05) - 0.05; // look slightly down
+      headRef.current.rotation.y = Math.sin(t * 0.8) * 0.35;
+      headRef.current.rotation.x = (Math.cos(t * 1.2) * 0.04) - 0.04; 
     }
 
     // 3. Rotating Gipsy-style chest vortex turbine core
@@ -43,42 +43,49 @@ function JaegerRobot() {
 
     // 5. Whole body slight drift
     if (groupRef.current) {
-      groupRef.current.position.y = -1.25 + Math.sin(t * 0.5) * 0.05;
+      groupRef.current.position.y = -1.2 + Math.sin(t * 0.5) * 0.04;
     }
   });
 
-  // Cyberpunk metal texture values
+  // Cyberpunk metal texture values (adjusted for high contrast without blackouts)
   const metalProps = {
-    color: '#1e1e2a',
-    metalness: 0.95,
-    roughness: 0.15,
+    color: '#383c50', // Metallic gunmetal steel with indigo tint
+    metalness: 0.7,
+    roughness: 0.28,
   };
 
-  const frameColor = '#2d2d3a';
+  const frameColor = '#4a4f66'; // Secondary metallic frame joints
 
-  // Emissive glowing cyan / pink properties
+  // Emissive glowing cyan / pink properties (lowered intensities to keep 3D volume)
   const cyanGlow = {
     color: '#00f2fe',
     emissive: '#00f2fe',
-    emissiveIntensity: 3,
+    emissiveIntensity: 1.2,
   };
   const pinkGlow = {
     color: '#f72585',
     emissive: '#f72585',
-    emissiveIntensity: 4,
+    emissiveIntensity: 0.8,
   };
   const turbineGlow = {
     color: '#00f5d4',
     emissive: '#00f5d4',
-    emissiveIntensity: 6,
+    emissiveIntensity: 1.5,
+  };
+
+  // Base outline configuration
+  const outlineProps = {
+    thickness: 0.015,
+    color: '#05050c',
   };
 
   return (
-    <group ref={groupRef} position={[0, -1.25, 0]} scale={0.9}>
+    <group ref={groupRef} position={[0, -1.2, 0]} scale={0.9}>
       {/* 1. PELVIS & LOWER BODY BASE */}
       <mesh position={[0, 0.9, 0]}>
         <boxGeometry args={[0.5, 0.25, 0.4]} />
-        <meshStandardMaterial {...metalProps} color="#222" />
+        <meshStandardMaterial {...metalProps} color="#252530" />
+        <Outlines {...outlineProps} />
       </mesh>
       
       {/* 2. TORSO / CHEST AREA */}
@@ -87,22 +94,26 @@ function JaegerRobot() {
         <mesh position={[0, 0.6, 0]}>
           <coneGeometry args={[0.42, 0.7, 4, 1]} />
           <meshStandardMaterial {...metalProps} />
+          <Outlines {...outlineProps} />
         </mesh>
         
         {/* Upper Back shoulders stabilizer wings */}
         <mesh position={[0, 0.75, -0.2]} rotation={[0.2, 0, 0]}>
           <boxGeometry args={[0.9, 0.15, 0.25]} />
           <meshStandardMaterial {...metalProps} color={frameColor} />
+          <Outlines {...outlineProps} />
         </mesh>
         {/* Wing Left */}
         <mesh position={[-0.55, 0.85, -0.22]} rotation={[0.4, 0.2, -0.25]}>
           <boxGeometry args={[0.3, 0.1, 0.08]} />
           <meshStandardMaterial {...pinkGlow} />
+          <Outlines {...outlineProps} />
         </mesh>
         {/* Wing Right */}
         <mesh position={[0.55, 0.85, -0.22]} rotation={[0.4, -0.2, 0.25]}>
           <boxGeometry args={[0.3, 0.1, 0.08]} />
           <meshStandardMaterial {...pinkGlow} />
+          <Outlines {...outlineProps} />
         </mesh>
 
         {/* Central Chest Vortex Core Turbine (rotating) */}
@@ -110,6 +121,7 @@ function JaegerRobot() {
           <mesh>
             <cylinderGeometry args={[0.15, 0.15, 0.06, 16]} />
             <meshStandardMaterial color="#111" metalness={0.9} />
+            <Outlines {...outlineProps} />
           </mesh>
           {/* Glowing spinning turbine blades */}
           <mesh ref={turbineRef} position={[0, 0.035, 0]}>
@@ -129,16 +141,19 @@ function JaegerRobot() {
           <mesh position={[0, -0.08, 0]}>
             <cylinderGeometry args={[0.08, 0.1, 0.15, 8]} />
             <meshStandardMaterial color="#111" metalness={0.9} />
+            <Outlines {...outlineProps} />
           </mesh>
           {/* Heavy Helmet */}
           <mesh position={[0, 0.06, 0]}>
             <boxGeometry args={[0.22, 0.18, 0.25]} />
             <meshStandardMaterial {...metalProps} color={frameColor} />
+            <Outlines {...outlineProps} />
           </mesh>
           {/* Face mask jaw plates */}
           <mesh position={[0, 0.0, 0.11]} rotation={[-0.1, 0, 0]}>
             <boxGeometry args={[0.16, 0.1, 0.06]} />
-            <meshStandardMaterial {...metalProps} color="#15151b" />
+            <meshStandardMaterial {...metalProps} color="#202028" />
+            <Outlines {...outlineProps} />
           </mesh>
           {/* Glowing Neon Visor (horizontal slot) */}
           <mesh position={[0, 0.07, 0.122]}>
@@ -163,27 +178,32 @@ function JaegerRobot() {
           <mesh position={[0, 0, 0]}>
             <sphereGeometry args={[0.18, 16, 16]} />
             <meshStandardMaterial {...metalProps} />
+            <Outlines {...outlineProps} />
           </mesh>
           {/* Glowing energy joint connector */}
           <mesh position={[0.03, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
             <cylinderGeometry args={[0.05, 0.05, 0.08]} />
             <meshStandardMaterial {...pinkGlow} />
+            <Outlines {...outlineProps} />
           </mesh>
           {/* Bicep Cylinder */}
           <mesh position={[-0.08, -0.28, 0]} rotation={[0, 0, 0.1]}>
             <cylinderGeometry args={[0.08, 0.07, 0.4, 8]} />
             <meshStandardMaterial {...metalProps} color={frameColor} />
+            <Outlines {...outlineProps} />
           </mesh>
           {/* Elbow Joint (glowing port) */}
           <mesh position={[-0.1, -0.5, 0]} rotation={[0, 0, Math.PI / 2]}>
             <cylinderGeometry args={[0.06, 0.06, 0.1]} />
             <meshStandardMaterial {...pinkGlow} />
+            <Outlines {...outlineProps} />
           </mesh>
           {/* Forearm shield armor */}
           <group position={[-0.12, -0.74, 0.02]} rotation={[0, 0, 0.08]}>
             <mesh>
               <boxGeometry args={[0.12, 0.38, 0.14]} />
               <meshStandardMaterial {...metalProps} />
+              <Outlines {...outlineProps} />
             </mesh>
             {/* Plasma Cannon forearm detail */}
             <mesh position={[-0.02, -0.05, 0.08]}>
@@ -194,7 +214,8 @@ function JaegerRobot() {
           {/* Claw / Fist */}
           <mesh position={[-0.14, -0.98, 0.01]}>
             <boxGeometry args={[0.09, 0.1, 0.1]} />
-            <meshStandardMaterial color="#111" metalness={0.9} />
+            <meshStandardMaterial color="#222" metalness={0.9} />
+            <Outlines {...outlineProps} />
           </mesh>
         </group>
 
@@ -204,27 +225,32 @@ function JaegerRobot() {
           <mesh position={[0, 0, 0]}>
             <sphereGeometry args={[0.18, 16, 16]} />
             <meshStandardMaterial {...metalProps} />
+            <Outlines {...outlineProps} />
           </mesh>
           {/* Glowing energy joint connector */}
           <mesh position={[-0.03, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
             <cylinderGeometry args={[0.05, 0.05, 0.08]} />
             <meshStandardMaterial {...pinkGlow} />
+            <Outlines {...outlineProps} />
           </mesh>
           {/* Bicep Cylinder */}
           <mesh position={[0.08, -0.28, 0]} rotation={[0, 0, -0.1]}>
             <cylinderGeometry args={[0.08, 0.07, 0.4, 8]} />
             <meshStandardMaterial {...metalProps} color={frameColor} />
+            <Outlines {...outlineProps} />
           </mesh>
           {/* Elbow Joint (glowing port) */}
           <mesh position={[0.1, -0.5, 0]} rotation={[0, 0, Math.PI / 2]}>
             <cylinderGeometry args={[0.06, 0.06, 0.1]} />
             <meshStandardMaterial {...pinkGlow} />
+            <Outlines {...outlineProps} />
           </mesh>
           {/* Forearm shield armor */}
           <group position={[0.12, -0.74, 0.02]} rotation={[0, 0, -0.08]}>
             <mesh>
               <boxGeometry args={[0.12, 0.38, 0.14]} />
               <meshStandardMaterial {...metalProps} />
+              <Outlines {...outlineProps} />
             </mesh>
             {/* Plasma Cannon forearm detail */}
             <mesh position={[0.02, -0.05, 0.08]}>
@@ -235,7 +261,8 @@ function JaegerRobot() {
           {/* Claw / Fist */}
           <mesh position={[0.14, -0.98, 0.01]}>
             <boxGeometry args={[0.09, 0.1, 0.1]} />
-            <meshStandardMaterial color="#111" metalness={0.9} />
+            <meshStandardMaterial color="#222" metalness={0.9} />
+            <Outlines {...outlineProps} />
           </mesh>
         </group>
       </group>
@@ -246,32 +273,38 @@ function JaegerRobot() {
         <mesh position={[0, -0.05, 0]} rotation={[Math.PI / 2, 0, 0.15]}>
           <cylinderGeometry args={[0.06, 0.06, 0.12]} />
           <meshStandardMaterial {...pinkGlow} />
+          <Outlines {...outlineProps} />
         </mesh>
         {/* Thigh Cylinder */}
         <mesh position={[-0.04, -0.32, 0]} rotation={[0, 0, 0.05]}>
           <cylinderGeometry args={[0.1, 0.08, 0.5, 8]} />
           <meshStandardMaterial {...metalProps} color={frameColor} />
+          <Outlines {...outlineProps} />
         </mesh>
         {/* Knee Shield Plate */}
         <mesh position={[-0.02, -0.32, 0.09]}>
           <boxGeometry args={[0.12, 0.25, 0.05]} />
           <meshStandardMaterial {...metalProps} />
+          <Outlines {...outlineProps} />
         </mesh>
         {/* Knee Joint (glowing port) */}
         <mesh position={[-0.06, -0.6, 0]} rotation={[0, 0, Math.PI / 2]}>
           <cylinderGeometry args={[0.07, 0.07, 0.1]} />
           <meshStandardMaterial {...pinkGlow} />
+          <Outlines {...outlineProps} />
         </mesh>
         {/* Shin Armor */}
         <mesh position={[-0.08, -0.92, 0.02]}>
           <boxGeometry args={[0.13, 0.55, 0.15]} />
           <meshStandardMaterial {...metalProps} />
+          <Outlines {...outlineProps} />
         </mesh>
         {/* Heavy Mechanical Ankle & Foot */}
         <group position={[-0.08, -1.22, 0.05]}>
           <mesh>
             <boxGeometry args={[0.16, 0.12, 0.32]} />
             <meshStandardMaterial {...metalProps} color="#222" />
+            <Outlines {...outlineProps} />
           </mesh>
           {/* Glowing bottom sole matrix lights */}
           <mesh position={[0, -0.065, 0]}>
@@ -286,32 +319,38 @@ function JaegerRobot() {
         <mesh position={[0, -0.05, 0]} rotation={[Math.PI / 2, 0, -0.15]}>
           <cylinderGeometry args={[0.06, 0.06, 0.12]} />
           <meshStandardMaterial {...pinkGlow} />
+          <Outlines {...outlineProps} />
         </mesh>
         {/* Thigh Cylinder */}
         <mesh position={[0.04, -0.32, 0]} rotation={[0, 0, -0.05]}>
           <cylinderGeometry args={[0.1, 0.08, 0.5, 8]} />
           <meshStandardMaterial {...metalProps} color={frameColor} />
+          <Outlines {...outlineProps} />
         </mesh>
         {/* Knee Shield Plate */}
         <mesh position={[0.02, -0.32, 0.09]}>
           <boxGeometry args={[0.12, 0.25, 0.05]} />
           <meshStandardMaterial {...metalProps} />
+          <Outlines {...outlineProps} />
         </mesh>
         {/* Knee Joint (glowing port) */}
         <mesh position={[0.06, -0.6, 0]} rotation={[0, 0, Math.PI / 2]}>
           <cylinderGeometry args={[0.07, 0.07, 0.1]} />
           <meshStandardMaterial {...pinkGlow} />
+          <Outlines {...outlineProps} />
         </mesh>
         {/* Shin Armor */}
         <mesh position={[0.08, -0.92, 0.02]}>
           <boxGeometry args={[0.13, 0.55, 0.15]} />
           <meshStandardMaterial {...metalProps} />
+          <Outlines {...outlineProps} />
         </mesh>
         {/* Heavy Mechanical Ankle & Foot */}
         <group position={[0.08, -1.22, 0.05]}>
           <mesh>
             <boxGeometry args={[0.16, 0.12, 0.32]} />
             <meshStandardMaterial {...metalProps} color="#222" />
+            <Outlines {...outlineProps} />
           </mesh>
           {/* Glowing bottom sole matrix lights */}
           <mesh position={[0, -0.065, 0]}>
@@ -357,11 +396,17 @@ export default function JaegerModel() {
       </div>
 
       <Canvas camera={{ position: [0, 0, 3.8], fov: 50 }} style={{ background: 'rgba(5, 5, 8, 0.4)' }}>
-        <ambientLight intensity={0.6} />
+        <ambientLight intensity={0.7} />
         {/* Cyberpunk accent lighting */}
-        <pointLight position={[-3, 3, 3]} intensity={1.5} color="#00f2fe" />
-        <pointLight position={[3, 3, 3]} intensity={1.5} color="#f72585" />
-        <directionalLight position={[0, 5, 5]} intensity={1.0} />
+        <pointLight position={[-3, 3, 3]} intensity={1.8} color="#00f2fe" />
+        <pointLight position={[3, 3, 3]} intensity={1.8} color="#f72585" />
+        
+        {/* Stronger Key Lights for diffuse shading definition */}
+        <directionalLight position={[5, 10, 5]} intensity={2.0} castShadow />
+        <directionalLight position={[-5, 5, -5]} intensity={0.8} color="#00f2fe" /> 
+        <directionalLight position={[0, -5, 2]} intensity={0.5} color="#f72585" />
+
+        <Environment preset="city" />
         
         <JaegerRobot />
         <OrbitControls enableZoom={false} enablePan={false} minPolarAngle={Math.PI/3} maxPolarAngle={Math.PI/1.8} />
