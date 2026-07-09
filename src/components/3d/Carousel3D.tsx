@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Html } from '@react-three/drei';
 import * as THREE from 'three';
@@ -120,12 +120,13 @@ const projects: Project[] = [
 
 interface CarouselRingProps {
   activeIndex: number;
+  isMobile: boolean;
 }
 
-function CarouselRing({ activeIndex }: CarouselRingProps) {
+function CarouselRing({ activeIndex, isMobile }: CarouselRingProps) {
   const ringRef = useRef<THREE.Group>(null);
   const count = projects.length;
-  const radius = 4.8; // Increased from 3.2 to accommodate 12 cards without overlap
+  const radius = isMobile ? 3.8 : 4.8; // Pull in slightly tighter on mobile
 
   // Target angle rotation
   const targetRotationY = -(activeIndex * (Math.PI * 2)) / count;
@@ -151,15 +152,15 @@ function CarouselRing({ activeIndex }: CarouselRingProps) {
         return (
           <group 
             key={idx} 
-            position={[x, -0.65, z]}
+            position={[x, isMobile ? -0.5 : -0.65, z]}
             rotation={[0, angle, 0]}
-            scale={1.0}
+            scale={isMobile ? 0.72 : 1.0}
           >
             {/* The 3D CSS Card */}
             <Html 
               transform 
               center
-              distanceFactor={1.15}
+              distanceFactor={isMobile ? 1.25 : 1.15}
               style={{ pointerEvents: 'auto' }}
             >
               <div style={{
@@ -282,6 +283,14 @@ function CarouselRing({ activeIndex }: CarouselRingProps) {
 
 export default function Carousel3D() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handlePrev = () => {
     setActiveIndex((prev) => (prev - 1 + projects.length) % projects.length);
@@ -292,12 +301,12 @@ export default function Carousel3D() {
   };
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '580px', overflow: 'hidden' }}>
+    <div style={{ position: 'relative', width: '100%', height: isMobile ? '480px' : '580px', overflow: 'hidden' }}>
       {/* 3D Canvas Area (adjusted camera to 6.4 to maintain proportion with radius 4.8) */}
-      <Canvas camera={{ position: [0, 0, 6.4], fov: 60 }} style={{ pointerEvents: 'auto', height: '100%', width: '100%' }}>
+      <Canvas camera={{ position: [0, 0, isMobile ? 5.8 : 6.4], fov: 60 }} style={{ pointerEvents: 'auto', height: '100%', width: '100%' }}>
         <ambientLight intensity={0.5} />
         <directionalLight position={[5, 10, 5]} intensity={1.5} />
-        <CarouselRing activeIndex={activeIndex} />
+        <CarouselRing activeIndex={activeIndex} isMobile={isMobile} />
       </Canvas>
 
       {/* Manual Navigation Controls */}

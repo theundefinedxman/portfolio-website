@@ -159,12 +159,7 @@ function App() {
         
         {/* HERO SECTION */}
         <section id="hero">
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: '1.15fr 0.85fr',
-            gap: '3rem',
-            alignItems: 'center'
-          }} className="form-grid">
+          <div className="hero-grid">
             <div className="hero-content">
               <div style={{
                 fontFamily: 'var(--font-orbitron)',
@@ -402,12 +397,7 @@ function App() {
         <section id="about">
           <h2 className="section-title">// About Dev</h2>
           
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: '1.1fr 0.9fr',
-            gap: '2.5rem',
-            marginBottom: '4rem'
-          }} className="form-grid">
+          <div className="about-grid">
             <div className="glass-panel" style={{ padding: '2.5rem' }}>
               <h3 style={{ fontFamily: 'var(--font-orbitron)', fontSize: '1.1rem', color: '#fff', marginBottom: '1.2rem', letterSpacing: '1px' }}>
                 Core Bio & Philosophy
