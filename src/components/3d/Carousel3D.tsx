@@ -156,14 +156,13 @@ function CarouselRing({ activeIndex }: CarouselRingProps) {
             {/* The 3D CSS Card */}
             <Html 
               transform 
-              occlude="blending"
               distanceFactor={3}
               style={{ pointerEvents: 'auto' }}
             >
               <div style={{
                 width: '320px',
                 padding: '20px',
-                background: 'rgba(13, 13, 22, 0.85)',
+                background: 'rgba(13, 13, 22, 0.9)',
                 backdropFilter: 'blur(12px)',
                 WebkitBackdropFilter: 'blur(12px)',
                 border: idx === activeIndex ? '2px solid var(--color-cyan)' : '1px solid rgba(255,255,255,0.06)',
@@ -171,7 +170,8 @@ function CarouselRing({ activeIndex }: CarouselRingProps) {
                 color: '#fff',
                 fontFamily: 'var(--font-sans)',
                 boxShadow: idx === activeIndex ? 'var(--shadow-cyan)' : '0 8px 32px 0 rgba(0, 0, 0, 0.4)',
-                transform: idx === activeIndex ? 'scale(1.05)' : 'scale(0.92) opacity(0.5)',
+                transform: idx === activeIndex ? 'scale(1.05)' : 'scale(0.9)',
+                opacity: idx === activeIndex ? 1 : 0.35,
                 transition: 'all 0.4s ease',
                 userSelect: 'none'
               }}>
